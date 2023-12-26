@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" type="text/css"/>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <header id="menu">
+        <div class="navbar-name" style="color: black;font-size: 200%;">Журнал оценок</div>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="openTab(event, 'zagoc'); showtable()">Загрузка оценок</a></li> 
+                <li><a href="#"onclick="openTab(event, 'edit'); showtable()">Создание и ред. журнала</a></li>
+                <li><a href="#"onclick="openTab(event, 'stat'); showtable()">Статистика в табл. виде</a></li>
+                <li><a href="#"onclick="openTab(event, 'graph'); hidetable()">Статистика в граф. виде</a></li>
+                <li><a href="#"onclick="openTab(event, 'orazrab'); hidetable()">Помощь</a></li>
+                <li><a href="#"onclick="openTab(event, 'oprog'); hidetable()">О программе</a></li>
+            </ul>
+        </nav>  
+        </div> 
+    </header>
+<main><p></p>
+    <div class="tabcontent" id="zagoc" style="display: none;">
+        <input type="file" id="fileInput" accept=".csv, .txt, .xlsx">
+        <button onclick="loadGrades()">Загрузка файла</button>
+    </div>
+    <div class="tabcontent" id="edit"> 
+        <input type="text" id="fio">
+        <input type="text" id="klas">
+        <input type="text" id="oc1">
+        <input type="text" id="oc2">
+        <input type="text" id="oc3">
+        <input type="text" id="oc4">
+        <input type="text" id="oc5">
+        <button onclick="dobavstroki(); ochistkapolya()" >Добавление ученика</button> 
+        <button onclick="ydalenie();ochistkapolya()" >Удаление ученика</button> 
+        <button onclick="redaktirovanie()" >Редактирование ученика</button> 
+        <button onclick="redaktirovanie2()" >Применить</button> 
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="tabcontent" id="stat" >
+        <input type="text" id="deti"> 
+        <table border="1px" id="stat3">
+            <tr>
+              <td></td>
+              <td>informatics</td>
+              <td>physics</td>
+              <td>mathemathics</td>
+              <td>literature</td>
+              <td>music</td>
+            </tr>
+            <tr>
+              <td>Средняя оценка</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Медиана</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+              </table>
+            
+              <table border="1px" id="stat4">
+                <tr>
+                  <td></td>
+                  <td>informatics</td>
+                  <td>physics</td>
+                  <td>mathemathics</td>
+                  <td>literature</td>
+                  <td>music</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                  </table>
+       <button onclick="med1(); sred(1); kolvo2()">статистика</button> 
+    </div>
+    <div id="graph" class="tabcontent">
+        <h3></i>Статистика (график)</h3>
+        <input type="text" id="deti2" placeholder="Класс">
+        <div style="text-align: center; margin: 0; padding: 0;" id="diagramma">
+        <input type="radio" name="gender" value="dsred" id="dsred">
+        <label for="dsred">Средний балл</label>
+        <input type="radio" name="gender" value="dmed" id="dmed">
+        <label for="dmed">Медиана</label>
+        <input type="radio" name="gender" value="dkolvo" id="dkolvo">
+        <label for="dkolvo">Количество оценок</label>
+        <input type="radio" name="gender" value="dprocent" id="dprocent" >
+        <label for="dprocent">Процент</label>
+        </div>
+        <button onclick="svazat(); drawChart()">Показать график</button>
+        <div class="graficc" id="chart_div" style="width: 1000px; height: 1000px;"></div>
+        </div>
+        <div id="orazrab" class="tabcontent">
+        <p>Если что-то непонятно, спрашивайте =) =) =)</p>
+        </div>
+        <div id="oprog" class="tabcontent">
+            <p>Програму придумал Ваня Калмыков, пасибо огромное ему!</p>
+        </div>
+    <table id="tablica"></table>
+
+    
+
+
+
+
+
+
+
+
+</main> 
+ <script>
+   function openTab(evt, tabName) {
+var i, tabcontent, tablinks;
+tabcontent = document.getElementsByClassName("tabcontent");
+for (i = 0; i < tabcontent.length; i++) {
+tabcontent[i].style.display = "none";
+}
+tablinks = document.getElementsByClassName("tablinks");
+for (i = 0; i < tablinks.length; i++) {
+tablinks[i].className = tablinks[i].className.replace(" active", "");
+}
+document.getElementById(tabName).style.display = "block";
+evt.currentTarget.className += " active";
+} 
+ </script><script src="index.js"></script>
+ <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    
+    drawChart();
+    </script>
+</body>
+</html>
