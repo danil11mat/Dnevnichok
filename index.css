@@ -1,16 +1,16 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-image: url(title.jpg);
-    background-repeat: no-repeat;
-    background-size: 100%;
+    font-family: Impact, sans-serif;
+    background-image: url(img/1580108708_3-p-serie-art-gori-3.jpg);
+    background-size: 1920px 2160px;
+    color: #2012ebc2 ;
 }
 
 #menu {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: #42b0cc;
+    background-color: #C0C0C0;
     padding: 15px 0;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
     z-index: 1;
@@ -29,7 +29,7 @@ nav ul {
 }
 
 nav ul li a {
-    color: black;
+    color: rgb(128, 98, 53);
     text-decoration: none;
     font-size: 22px; /* увелич шаг с 18 до 22 */
     position: relative;
